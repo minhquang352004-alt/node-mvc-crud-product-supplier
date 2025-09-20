@@ -1,0 +1,33 @@
+<%- include('../partials/header') %>
+
+    <h2>Edit Product</h2>
+    <form action="/products/<%= product._id %>?_method=PUT" method="POST" class="mt-3">
+        <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input required name="name" value="<%= product.name %>" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Supplier</label>
+            <select name="supplier" required class="form-select">
+      <option value="">-- choose supplier --</option>
+      <% suppliers.forEach(s => { %>
+        <option value="<%= s._id %>" <%= product.supplier && product.supplier.toString() === s._id.toString() ? 'selected' : '' %>><%= s.name %></option>
+      <% }) %>
+    </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Address</label>
+            <input name="address" value="<%= product.address || '' %>" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Phone</label>
+            <input name="phone" value="<%= product.phone || '' %>" class="form-control" />
+        </div>
+
+        <button class="btn btn-primary">Update</button>
+        <a href="/products" class="btn btn-secondary">Cancel</a>
+    </form>
+
+    <%- include('../partials/footer') %>
